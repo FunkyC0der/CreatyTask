@@ -14,9 +14,9 @@ namespace CreatyTest
       if (!Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
         return;
 
-      var painter = hit.transform.GetComponent<Painter>();
-      if(painter)
-        painter.Paint(hit.textureCoord);
+      var paintable = hit.transform.GetComponent<IPaintable>();
+      if(paintable != null)
+        paintable.Paint(hit.textureCoord);
     }
   }
 }

@@ -29,8 +29,8 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _PenSize: 0.044
+    - _PenSize: 0.01
     m_Colors:
-    - _PenColor: {r: 0, g: 0.1901753, b: 1, a: 1}
-    - _PenPosition: {r: 0.49440557, g: 0.9274177, b: 0, a: 0}
+    - _PenColor: {r: 1, g: 0.95380986, b: 0, a: 1}
+    - _PenPosition: {r: 0.16430986, g: 0.64616406, b: 0, a: 0}
   m_BuildTextureStacks: []

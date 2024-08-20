@@ -3,8 +3,10 @@ using UnityEngine;
 namespace CreatyTest
 {
   [RequireComponent(typeof(Renderer))]
-  public class Painter : MonoBehaviour
+  public class Paintable : MonoBehaviour, IPaintable
   {
+    private const RenderTextureFormat m_kRenderTextureFormat = RenderTextureFormat.ARGBFloat;
+    
     private static readonly Vector2Int m_sPaintTextureDefaultSize = new(1024, 1024);
     private static readonly int m_sPenPositionPropertyId = Shader.PropertyToID("_PenPosition");
 
@@ -12,6 +14,7 @@ namespace CreatyTest
     public Material PaintMaterial;
 
     private Renderer m_renderer;
+    
     private RenderTexture m_paintTexture;
     private RenderTexture m_prevPaintTexture;
 
@@ -40,7 +43,7 @@ namespace CreatyTest
 
       if (material.mainTexture)
       {
-        renderTexture = new RenderTexture(material.mainTexture.width, material.mainTexture.height, 0, material.mainTexture.graphicsFormat);
+        renderTexture = new RenderTexture(material.mainTexture.width, material.mainTexture.height, 0, m_kRenderTextureFormat);
         Graphics.Blit(material.mainTexture, renderTexture);
       }
       else
@@ -49,7 +52,7 @@ namespace CreatyTest
           m_sPaintTextureDefaultSize.x,
           m_sPaintTextureDefaultSize.y,
           0,
-          RenderTextureFormat.ARGBFloat);
+          m_kRenderTextureFormat);
 
         Texture2D solidTexture = new(1, 1);
         solidTexture.SetPixel(0, 0, EmptyTextureColor);
