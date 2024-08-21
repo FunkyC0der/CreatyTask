@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a8dac874ec4319b5d81b8bb344526b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintableDesc: {fileID: 11400000, guid: 3bb1815ae692a4e65ba5352fd160f6ea, type: 2}
+  PaintableDesc: {fileID: 11400000, guid: 1d48a807c28e44bfc8d4d8984a74540d, type: 2}
   SaveLoadService: {fileID: 1840986670}
 --- !u!1 &69637411
 GameObject:
