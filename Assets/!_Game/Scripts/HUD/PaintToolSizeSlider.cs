@@ -12,7 +12,7 @@ namespace CreatyTest.HUD
     public float MaxSize;
 
     private float m_currentSize;
-    private PaintTool m_paintTool;
+    private PaintToolDesc m_paintTool;
 
     
     private void Start()
@@ -28,7 +28,7 @@ namespace CreatyTest.HUD
 
     private void UpdatePaintTool()
     {
-      m_paintTool = PaintService.PaintTool;
+      m_paintTool = PaintService.PaintToolDesc;
 
       gameObject.SetActive(m_paintTool.CanChangeSize);
       

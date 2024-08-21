@@ -10,6 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: e9866822755e437b8cb985d08e6d9746, type: 3}
-  m_Name: Pen_PaintTool
+  m_Name: Fill_PaintTool
   m_EditorClassIdentifier: 
-  Prefab: {fileID: 279836994634233467, guid: b876c9b2e031c4847a7f841e245054d3, type: 3}
+  PaintMaterial: {fileID: 2100000, guid: 6c249cd222b4f40e599b975984783147, type: 2}
+  CanChangeSize: 0

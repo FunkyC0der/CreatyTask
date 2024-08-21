@@ -7,7 +7,7 @@ namespace CreatyTest.HUD
     public PaintService PaintService;
     public FlexibleColorPicker ColorPickerView;
 
-    private PaintTool m_paintTool;
+    private PaintToolDesc m_paintTool;
 
     private void Start()
     {
@@ -19,7 +19,7 @@ namespace CreatyTest.HUD
 
     private void UpdatePaintTool()
     {
-      m_paintTool = PaintService.PaintTool;
+      m_paintTool = PaintService.PaintToolDesc;
       ColorPickerView.color = m_paintTool.Color;
     }
 
