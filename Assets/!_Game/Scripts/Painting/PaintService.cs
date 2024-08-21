@@ -25,6 +25,8 @@ namespace CreatyTest.Painting
         return;
 
       PaintToolDesc = paintToolDesc;
+      SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
+      
       OnPaintToolChanged?.Invoke();
     }
 
