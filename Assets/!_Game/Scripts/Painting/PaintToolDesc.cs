@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreatyTest
+namespace CreatyTest.Painting
 {
   [CreateAssetMenu(fileName = "_PaintTool", menuName = "Game/PaintTool")]
   public class PaintToolDesc : ScriptableObject

@@ -1,7 +1,7 @@
 using UnityEditor;
 using UnityEngine;
 
-namespace CreatyTest.Editor
+namespace CreatyTest.__Game.Scripts.Editor
 {
   public static class Tools
   {

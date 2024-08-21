@@ -1,3 +1,4 @@
+using CreatyTest.Painting;
 using UnityEngine;
 using UnityEngine.UI;
 

@@ -2,7 +2,7 @@ using System;
 using CreatyTest.SaveLoad;
 using UnityEngine;
 
-namespace CreatyTest
+namespace CreatyTest.Painting
 {
   public class PaintService : MonoBehaviour
   {
