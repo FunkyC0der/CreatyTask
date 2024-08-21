@@ -1,4 +1,5 @@
-using CreatyTest.Painting;
+using CreatyTest.Painting.Paintables;
+using CreatyTest.Painting.PaintTools;
 using UnityEditor;
 using UnityEngine;
 

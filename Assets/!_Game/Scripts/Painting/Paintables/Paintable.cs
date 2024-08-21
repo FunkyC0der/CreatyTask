@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CreatyTest.Painting
+namespace CreatyTest.Painting.Paintables
 {
   [RequireComponent(typeof(Renderer))]
   public class Paintable : MonoBehaviour

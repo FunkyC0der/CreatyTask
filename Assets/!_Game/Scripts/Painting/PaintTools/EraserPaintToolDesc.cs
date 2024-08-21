@@ -1,6 +1,7 @@
+using CreatyTest.Painting.Paintables;
 using UnityEngine;
 
-namespace CreatyTest.Painting
+namespace CreatyTest.Painting.PaintTools
 {
   [CreateAssetMenu(menuName = "Eraser_PaintTool", fileName = "Game/EraserPaintTool")]
   public class EraserPaintToolDesc : PaintToolDesc

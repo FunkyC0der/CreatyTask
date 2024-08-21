@@ -1,8 +1,9 @@
 using System;
+using CreatyTest.Painting.Paintables;
 using CreatyTest.SaveLoad;
 using UnityEngine;
 
-namespace CreatyTest.Painting
+namespace CreatyTest.Painting.PaintTools
 {
   public class PaintToolService : MonoBehaviour
   {

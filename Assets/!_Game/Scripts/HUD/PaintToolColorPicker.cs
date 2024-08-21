@@ -1,4 +1,4 @@
-using CreatyTest.Painting;
+using CreatyTest.Painting.PaintTools;
 using UnityEngine;
 using UnityEngine.Serialization;
 
