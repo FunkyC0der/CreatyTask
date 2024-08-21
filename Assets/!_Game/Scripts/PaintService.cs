@@ -5,13 +5,26 @@ namespace CreatyTest
 {
   public class PaintService : MonoBehaviour
   {
+    public event Action OnPaintToolChanged;
+    
     public Camera Camera;
     public PaintToolDesc PaintToolDesc;
 
     private PaintTool m_paintTool;
+    
+    public PaintTool PaintTool => m_paintTool;
 
     private void Awake() => 
-      m_paintTool = Instantiate(PaintToolDesc.Prefab, transform);
+      CreatePaintTool(PaintToolDesc);
+
+    public void ChangePaintTool(PaintToolDesc paintToolDesc)
+    {
+      if (PaintToolDesc == paintToolDesc)
+        return;
+      
+      Destroy(m_paintTool);
+      CreatePaintTool(paintToolDesc);
+    }
 
     private void Update()
     {
@@ -27,6 +40,14 @@ namespace CreatyTest
 
       m_paintTool.UpdatePosition(hit.textureCoord);
       paintable.Paint(m_paintTool.PaintMaterial);
+    }
+
+    private void CreatePaintTool(PaintToolDesc paintToolDesc)
+    {
+      m_paintTool = Instantiate(paintToolDesc.Prefab, transform);
+      PaintToolDesc = paintToolDesc;
+      
+      OnPaintToolChanged?.Invoke();
     }
   }
 }
