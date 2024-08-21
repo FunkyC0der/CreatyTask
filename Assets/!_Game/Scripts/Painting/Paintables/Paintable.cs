@@ -33,6 +33,22 @@ namespace CreatyTest.Painting.Paintables
       Graphics.CopyTexture(m_paintTexture, m_prevPaintTexture);
     }
 
+    public void SetTexture(Texture texture) => 
+      Graphics.Blit(texture, m_paintTexture);
+
+    public Texture2D GetTexture()
+    {
+      RenderTexture cacheActiveRT = RenderTexture.active;
+      RenderTexture.active = m_paintTexture;
+
+      Texture2D texture = new Texture2D(m_paintTexture.width, m_paintTexture.height, TextureFormat.ARGB32, false);
+      texture.ReadPixels(new Rect(0, 0, m_paintTexture.width, m_paintTexture.height), 0, 0);
+      texture.Apply();
+
+      RenderTexture.active = cacheActiveRT;
+      return texture;
+    }
+
     public void Paint(Material paintMaterial)
     {
       Graphics.Blit(m_paintTexture, m_prevPaintTexture);

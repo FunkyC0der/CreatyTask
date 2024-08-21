@@ -32,13 +32,28 @@ namespace CreatyTest.Painting.Paintables
       CreatePaintable(paintableDesc);
     }
 
+    public void Save() => 
+      SaveLoadService.SavePaintableTexture(m_paintable.Desc, m_paintable.GetTexture());
+
+    public void Load() =>
+      m_paintable.SetTexture(SaveLoadService.LoadPaintableTexture(m_paintable.Desc));
+
+    public void Clear()
+    {
+      m_paintable.SetTexture(m_paintable.OriginalTexture);
+      SaveLoadService.ClearPaintableTexture(m_paintable.Desc);
+    }
+
+    public bool CanLoad() =>
+      SaveLoadService.HasSavedPaintableTexture(m_paintable.Desc);
+
     private void CreatePaintable(PaintableDesc paintableDesc)
     {
       PaintableDesc = paintableDesc;
       
       m_paintable = Instantiate(PaintableDesc.Prefab, transform);
       m_paintable.Desc = PaintableDesc;
-      
+
       SaveLoadService.SavePaintable(PaintableDesc);
       
       OnPaintableChanged?.Invoke(m_paintable);
