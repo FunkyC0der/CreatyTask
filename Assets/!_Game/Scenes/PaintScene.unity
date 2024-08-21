@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03dac84f6b745289a225f34a1fe3f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintService: {fileID: 665249441}
+  paintToolService: {fileID: 0}
   Slider: {fileID: 185681376}
   MinSize: 0.001
   MaxSize: 0.05
@@ -1264,7 +1264,7 @@ GameObject:
   - component: {fileID: 665249442}
   - component: {fileID: 665249441}
   m_Layer: 0
-  m_Name: PaintService
+  m_Name: PaintToolService
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1607,7 +1607,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintService: {fileID: 665249441}
+  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: 570a41a9388fc4f3da44dc2d387f360e, type: 2}
 --- !u!1 &1125212276
 GameObject:
@@ -1743,7 +1743,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintService: {fileID: 665249441}
+  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: 2aaf2dbba92044f3f939a36e2c9c9adf, type: 2}
 --- !u!224 &1187447298 stripped
 RectTransform:
@@ -2062,7 +2062,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a319926e01d450a92eb43c686d1bacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintService: {fileID: 665249441}
+  paintToolService: {fileID: 0}
   ColorPickerView: {fileID: 1187447299}
 --- !u!1 &1603927326
 GameObject:
@@ -2597,7 +2597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintService: {fileID: 665249441}
+  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: ce5ed8cb7eba4456fb83d28e22f0c1dd, type: 2}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:

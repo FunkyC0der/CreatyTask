@@ -4,7 +4,7 @@ using UnityEngine;
 
 namespace CreatyTest.Painting
 {
-  public class PaintService : MonoBehaviour
+  public class PaintToolService : MonoBehaviour
   {
     public event Action OnPaintToolChanged;
     

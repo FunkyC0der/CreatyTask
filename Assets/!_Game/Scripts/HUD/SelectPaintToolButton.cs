@@ -1,5 +1,6 @@
 using CreatyTest.Painting;
 using UnityEngine;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CreatyTest.HUD
@@ -7,7 +8,8 @@ namespace CreatyTest.HUD
   [RequireComponent(typeof(Button))]
   public class SelectPaintToolButton : MonoBehaviour
   {
-    public PaintService PaintService;
+    [FormerlySerializedAs("PaintService")]
+    public PaintToolService paintToolService;
     public PaintToolDesc PaintToolDesc;
 
     private Button m_button;
@@ -21,13 +23,13 @@ namespace CreatyTest.HUD
     private void Start()
     {
       UpdateView();
-      PaintService.OnPaintToolChanged += UpdateView;
+      paintToolService.OnPaintToolChanged += UpdateView;
     }
 
     private void UpdateView() => 
-      m_button.interactable = PaintToolDesc != PaintService.PaintToolDesc;
+      m_button.interactable = PaintToolDesc != paintToolService.PaintToolDesc;
 
     private void SelectPaintTool() => 
-      PaintService.ChangePaintTool(PaintToolDesc);
+      paintToolService.ChangePaintTool(PaintToolDesc);
   }
 }
