@@ -2,7 +2,7 @@ using UnityEngine;
 
 namespace CreatyTest.HUD
 {
-  public class ColorPicker : MonoBehaviour
+  public class PaintToolColorPicker : MonoBehaviour
   {
     public PaintService PaintService;
     public FlexibleColorPicker ColorPickerView;

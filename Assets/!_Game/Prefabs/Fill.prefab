@@ -45,3 +45,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintMaterial: {fileID: 2100000, guid: 6c249cd222b4f40e599b975984783147, type: 2}
+  CanChangeSize: 0
