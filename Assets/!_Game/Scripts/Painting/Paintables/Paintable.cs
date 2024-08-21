@@ -11,6 +11,9 @@ namespace CreatyTest.Painting.Paintables
 
     public Color EmptyTextureColor = Color.white;
 
+    [HideInInspector]
+    public PaintableDesc Desc;
+
     private Renderer m_renderer;
 
     private Texture m_originalTexture;

@@ -27,7 +27,7 @@ namespace CreatyTest.Painting.Paintables
         return;
       
       if(m_paintable)
-        Destroy(m_paintable);
+        Destroy(m_paintable.gameObject);
 
       CreatePaintable(paintableDesc);
     }
@@ -35,7 +35,10 @@ namespace CreatyTest.Painting.Paintables
     private void CreatePaintable(PaintableDesc paintableDesc)
     {
       PaintableDesc = paintableDesc;
+      
       m_paintable = Instantiate(PaintableDesc.Prefab, transform);
+      m_paintable.Desc = PaintableDesc;
+      
       SaveLoadService.SavePaintable(PaintableDesc);
       
       OnPaintableChanged?.Invoke(m_paintable);
