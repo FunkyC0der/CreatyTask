@@ -7,7 +7,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pen_PaintTool
+  m_Name: Fill_PaintTool
   m_Shader: {fileID: 4800000, guid: 386a9953640d47e88482cf78f4373ab7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
@@ -30,10 +30,10 @@ Material:
     m_Ints: []
     m_Floats:
     - _PenSize: 0.01
-    - _Size: 0.01
+    - _Size: 1
     m_Colors:
-    - _Color: {r: 0, g: 1, b: 0.47272605, a: 1}
+    - _Color: {r: 0.6660018, g: 0, b: 1, a: 1}
     - _PenColor: {r: 1, g: 0.95380986, b: 0, a: 1}
     - _PenPosition: {r: 0.16430986, g: 0.64616406, b: 0, a: 0}
-    - _Position: {r: 0.26258475, g: 0.5471019, b: 0, a: 0}
+    - _Position: {r: 0.29784733, g: 0.48665696, b: 0, a: 0}
   m_BuildTextureStacks: []
