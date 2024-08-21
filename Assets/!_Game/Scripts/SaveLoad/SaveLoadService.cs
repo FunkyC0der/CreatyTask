@@ -7,20 +7,33 @@ namespace CreatyTest.SaveLoad
   public class SaveLoadService : MonoBehaviour
   {
     private const string m_kPaintToolIdKey = "PaintToolId";
+    private const string m_kPaintableIdKey = "PaintableId";
 
-    public void SaveCurrentPaintTool(PaintToolDesc paintToolDesc)
+    public void SavePaintTool(PaintToolDesc paintToolDesc) => 
+      SaveAssetPath(m_kPaintToolIdKey, paintToolDesc);
+
+    public PaintToolDesc LoadPaintTool() => 
+      LoadAssetByPath<PaintToolDesc>(m_kPaintToolIdKey);
+
+    public void SavePaintable(PaintableDesc paintableDesc) =>
+      SaveAssetPath(m_kPaintableIdKey, paintableDesc);
+
+    public PaintableDesc LoadPaintable() =>
+      LoadAssetByPath<PaintableDesc>(m_kPaintableIdKey);
+
+    private void SaveAssetPath(string key, Object asset)
     {
-      PlayerPrefs.SetString(m_kPaintToolIdKey, AssetDatabase.GetAssetPath(paintToolDesc));
+      PlayerPrefs.SetString(key, AssetDatabase.GetAssetPath(asset));
       PlayerPrefs.Save();
     }
 
-    public PaintToolDesc LoadCurrentPaintTool()
+    private T LoadAssetByPath<T>(string key) where T : Object
     {
-      if (!PlayerPrefs.HasKey(m_kPaintToolIdKey))
+      if (!PlayerPrefs.HasKey(key))
         return null;
-
-      string path = PlayerPrefs.GetString(m_kPaintToolIdKey);
-      return AssetDatabase.LoadAssetAtPath<PaintToolDesc>(path);
+      
+      string path = PlayerPrefs.GetString(key);
+      return AssetDatabase.LoadAssetAtPath<T>(path);
     }
   }
 }

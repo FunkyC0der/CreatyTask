@@ -10,20 +10,15 @@ namespace CreatyTest.Painting
     
     public Camera Camera;
     public PaintToolDesc PaintToolDesc;
+    public PaintableService PaintableService;
     public SaveLoadService SaveLoadService;
 
     private void Awake()
     {
-      PaintToolDesc savedPaintToolDesc = SaveLoadService.LoadCurrentPaintTool();
-      if (savedPaintToolDesc)
-      {
-        ChangePaintTool(savedPaintToolDesc);
-      }
-      else
-      {
-        PaintToolDesc.Init();
-        SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
-      }
+      PaintableService.OnPaintableChanged += ReInitPaintTool;
+      
+      PaintToolDesc paintToolDesc = SaveLoadService.LoadPaintTool() ?? PaintToolDesc;
+      SetPaintTool(paintToolDesc);
     }
 
     public void ChangePaintTool(PaintToolDesc paintToolDesc)
@@ -31,12 +26,7 @@ namespace CreatyTest.Painting
       if (PaintToolDesc == paintToolDesc)
         return;
 
-      PaintToolDesc = paintToolDesc;
-      PaintToolDesc.Init();
-      
-      SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
-      
-      OnPaintToolChanged?.Invoke();
+      SetPaintTool(paintToolDesc);
     }
 
     private void Update()
@@ -54,5 +44,16 @@ namespace CreatyTest.Painting
       PaintToolDesc.UpdatePosition(hit.textureCoord);
       paintable.Paint(PaintToolDesc.PaintMaterial);
     }
+
+    private void SetPaintTool(PaintToolDesc paintToolDesc)
+    {
+      PaintToolDesc = paintToolDesc;
+      PaintToolDesc.Init(PaintableService.Paintable);
+      SaveLoadService.SavePaintTool(PaintToolDesc);
+      OnPaintToolChanged?.Invoke();
+    }
+
+    private void ReInitPaintTool(Paintable paintable) => 
+      PaintToolDesc.Init(paintable);
   }
 }

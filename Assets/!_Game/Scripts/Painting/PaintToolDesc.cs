@@ -29,6 +29,6 @@ namespace CreatyTest.Painting
     public void UpdatePosition(Vector2 position) => 
       PaintMaterial.SetVector(m_sPositionPropertyId, position);
     
-    public virtual void Init() { }
+    public virtual void Init(Paintable paintableServicePaintable) { }
   }
 }
