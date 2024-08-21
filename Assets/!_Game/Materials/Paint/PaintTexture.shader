@@ -3,9 +3,9 @@ Shader "Unlit/PaintTexture"
     Properties
     {
         _MainTex ("Texture", 2D) = "white" {}
-    	_PenPosition ("PenPosition", Vector) = (0, 0, 0, 0)
-    	_PenSize ("PenSize", Range(0, 1)) = 0.1
-    	_PenColor ("PenColor", Color) = (1, 0, 0, 1)
+    	_Position ("Position", Vector) = (0, 0, 0, 0)
+    	_Size ("Size", Range(0, 1)) = 0.1
+    	_Color ("Color", Color) = (1, 0, 0, 1)
     }
     SubShader
     {
@@ -38,9 +38,9 @@ Shader "Unlit/PaintTexture"
 			sampler2D _MainTex;
 			float4 _MainTex_ST;
 
-			float2 _PenPosition;
-			float _PenSize;
-			float4 _PenColor;
+			float2 _Position;
+			float _Size;
+			float4 _Color;
 			
 			v2f vert (appdata v)
 			{
@@ -54,7 +54,7 @@ Shader "Unlit/PaintTexture"
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				return distance(i.uv, _PenPosition) < _PenSize ? _PenColor : col;
+				return distance(i.uv, _Position) < _Size ? _Color : col;
 			}
 			ENDCG
         }

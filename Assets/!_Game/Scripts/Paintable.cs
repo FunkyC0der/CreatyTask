@@ -3,15 +3,13 @@ using UnityEngine;
 namespace CreatyTest
 {
   [RequireComponent(typeof(Renderer))]
-  public class Paintable : MonoBehaviour, IPaintable
+  public class Paintable : MonoBehaviour
   {
-    private const RenderTextureFormat m_kRenderTextureFormat = RenderTextureFormat.ARGBFloat;
+    private const RenderTextureFormat m_kRenderTextureFormat = RenderTextureFormat.ARGB32;
     
     private static readonly Vector2Int m_sPaintTextureDefaultSize = new(1024, 1024);
-    private static readonly int m_sPenPositionPropertyId = Shader.PropertyToID("_PenPosition");
 
     public Color EmptyTextureColor = Color.white;
-    public Material PaintMaterial;
 
     private Renderer m_renderer;
     
@@ -29,13 +27,12 @@ namespace CreatyTest
       Graphics.CopyTexture(m_paintTexture, m_prevPaintTexture);
     }
 
-    public void Paint(Vector2 textureCoord)
+    public void Paint(Material paintMaterial)
     {
-      PaintMaterial.SetVector(m_sPenPositionPropertyId, textureCoord);
       Graphics.Blit(m_paintTexture, m_prevPaintTexture);
-      Graphics.Blit(m_prevPaintTexture, m_paintTexture, PaintMaterial);
+      Graphics.Blit(m_prevPaintTexture, m_paintTexture, paintMaterial);
     }
-    
+
     private RenderTexture CreateNewRenderTexture()
     {
       RenderTexture renderTexture;
