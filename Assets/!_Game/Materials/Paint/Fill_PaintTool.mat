@@ -31,9 +31,10 @@ Material:
     m_Floats:
     - _PenSize: 0.01
     - _Size: 1
+    - _UseTexture: 0
     m_Colors:
-    - _Color: {r: 0.51778555, g: 1, b: 0, a: 1}
+    - _Color: {r: 0.91562116, g: 0.08030092, b: 0.080384545, a: 1}
     - _PenColor: {r: 1, g: 0.95380986, b: 0, a: 1}
     - _PenPosition: {r: 0.16430986, g: 0.64616406, b: 0, a: 0}
-    - _Position: {r: 0.24889246, g: 0.5888293, b: 0, a: 0}
+    - _Position: {r: 0.2785402, g: 0.5540141, b: 0, a: 0}
   m_BuildTextureStacks: []

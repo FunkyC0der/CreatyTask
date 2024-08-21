@@ -21,10 +21,15 @@ namespace CreatyTest.HUD
     private void UpdatePaintTool()
     {
       m_paintTool = PaintService.PaintToolDesc;
+      
+      gameObject.SetActive(m_paintTool.CanChangeColor);
       ColorPickerView.color = m_paintTool.Color;
     }
 
-    private void ChangeColor(Color color) => 
-      m_paintTool.Color = color;
+    private void ChangeColor(Color color)
+    {
+      if(m_paintTool.CanChangeColor)
+        m_paintTool.Color = color;
+    }
   }
 }

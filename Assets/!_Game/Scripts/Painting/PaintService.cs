@@ -16,7 +16,14 @@ namespace CreatyTest.Painting
     {
       PaintToolDesc savedPaintToolDesc = SaveLoadService.LoadCurrentPaintTool();
       if (savedPaintToolDesc)
-        ChangePaintTool(PaintToolDesc);
+      {
+        ChangePaintTool(savedPaintToolDesc);
+      }
+      else
+      {
+        PaintToolDesc.Init();
+        SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
+      }
     }
 
     public void ChangePaintTool(PaintToolDesc paintToolDesc)
@@ -25,6 +32,8 @@ namespace CreatyTest.Painting
         return;
 
       PaintToolDesc = paintToolDesc;
+      PaintToolDesc.Init();
+      
       SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
       
       OnPaintToolChanged?.Invoke();

@@ -2,11 +2,11 @@ Shader "Unlit/PaintTexture"
 {
     Properties
     {
-        _MainTex ("Texture", 2D) = "white" {}
-    	_Position ("Position", Vector) = (0, 0, 0, 0)
-    	_Size ("Size", Range(0, 1)) = 0.1
+    	_MainTex ("Texture", 2D) = "white" {}
+		_Size ("Size", Range(0, 1)) = 0.1
     	_Color ("Color", Color) = (1, 0, 0, 1)
-    }
+    	[Toggle] _UseTexture ("Use Paint Texture", Int) = 0
+	}
     SubShader
     {
         Tags
@@ -41,6 +41,8 @@ Shader "Unlit/PaintTexture"
 			float2 _Position;
 			float _Size;
 			float4 _Color;
+			sampler2D _PaintTex;
+			int _UseTexture;
 			
 			v2f vert (appdata v)
 			{
@@ -54,7 +56,9 @@ Shader "Unlit/PaintTexture"
 			{
 				// sample the texture
 				fixed4 col = tex2D(_MainTex, i.uv);
-				return distance(i.uv, _Position) < _Size ? _Color : col;
+				fixed4 paintColor = _UseTexture == 1 ? tex2D(_PaintTex, i.uv) : _Color;
+				
+				return distance(i.uv, _Position) < _Size ? paintColor : col;
 			}
 			ENDCG
         }

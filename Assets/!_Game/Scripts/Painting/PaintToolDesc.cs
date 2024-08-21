@@ -10,7 +10,9 @@ namespace CreatyTest.Painting
     private static readonly int m_sSizePropertyId = Shader.PropertyToID("_Size");
 
     public Material PaintMaterial;
+    
     public bool CanChangeSize = true;
+    public bool CanChangeColor = true;
 
     public Color Color
     {
@@ -26,5 +28,7 @@ namespace CreatyTest.Painting
 
     public void UpdatePosition(Vector2 position) => 
       PaintMaterial.SetVector(m_sPositionPropertyId, position);
+    
+    public virtual void Init() { }
   }
 }

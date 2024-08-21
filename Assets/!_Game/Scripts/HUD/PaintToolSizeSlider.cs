@@ -32,12 +32,13 @@ namespace CreatyTest.HUD
       m_paintTool = PaintService.PaintToolDesc;
 
       gameObject.SetActive(m_paintTool.CanChangeSize);
-      
-      if (m_paintTool.CanChangeSize)
-        Slider.value = m_paintTool.Size;
+      Slider.value = m_paintTool.Size;
     }
 
-    private void ChangeSize(float value) => 
-      m_paintTool.Size = value;
+    private void ChangeSize(float value)
+    {
+      if(m_paintTool.CanChangeSize)
+        m_paintTool.Size = value;
+    }
   }
 }

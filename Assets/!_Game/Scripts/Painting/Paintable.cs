@@ -12,9 +12,12 @@ namespace CreatyTest.Painting
     public Color EmptyTextureColor = Color.white;
 
     private Renderer m_renderer;
-    
+
+    private Texture m_originalTexture;
     private RenderTexture m_paintTexture;
     private RenderTexture m_prevPaintTexture;
+    
+    public Texture OriginalTexture => m_originalTexture;
 
     private void Awake()
     {
@@ -42,6 +45,8 @@ namespace CreatyTest.Painting
       {
         renderTexture = new RenderTexture(material.mainTexture.width, material.mainTexture.height, 0, m_kRenderTextureFormat);
         Graphics.Blit(material.mainTexture, renderTexture);
+      
+        m_originalTexture = material.mainTexture;
       }
       else
       {
@@ -56,6 +61,8 @@ namespace CreatyTest.Painting
         solidTexture.Apply();
         
         Graphics.Blit(solidTexture, renderTexture);
+
+        m_originalTexture = solidTexture;
       }
 
       return renderTexture;

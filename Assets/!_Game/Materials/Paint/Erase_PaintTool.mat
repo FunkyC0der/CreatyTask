@@ -7,12 +7,13 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Pen_PaintTool
+  m_Name: Erase_PaintTool
   m_Shader: {fileID: 4800000, guid: 386a9953640d47e88482cf78f4373ab7, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
-  m_InvalidKeywords: []
+  m_InvalidKeywords:
+  - _USETEXTURE_ON
   m_LightmapFlags: 4
   m_EnableInstancingVariants: 0
   m_DoubleSidedGI: 0
@@ -24,17 +25,17 @@ Material:
     serializedVersion: 3
     m_TexEnvs:
     - _MainTex:
-        m_Texture: {fileID: 0}
+        m_Texture: {fileID: 2800000, guid: 44cced520ecfd9f4292979a4fe8268c4, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
     - _PenSize: 0.01
-    - _Size: 0.021
-    - _UseTexture: 0
+    - _Size: 0.011251914
+    - _UseTexture: 1
     m_Colors:
-    - _Color: {r: 0, g: 0.33811593, b: 1, a: 1}
+    - _Color: {r: 1, g: 1, b: 1, a: 1}
     - _PenColor: {r: 1, g: 0.95380986, b: 0, a: 1}
     - _PenPosition: {r: 0.16430986, g: 0.64616406, b: 0, a: 0}
-    - _Position: {r: 0.2621975, g: 0.56618416, b: 0, a: 0}
+    - _Position: {r: 0.41939247, g: 0.55696017, b: 0, a: 0}
   m_BuildTextureStacks: []
