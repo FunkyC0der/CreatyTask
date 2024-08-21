@@ -2,15 +2,15 @@ using System;
 using CreatyTest.Painting.Paintables;
 using CreatyTest.SaveLoad;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 namespace CreatyTest.Painting.PaintTools
 {
   public class PaintToolService : MonoBehaviour
   {
-    public event Action OnPaintToolChanged;
+    public event Action<PaintToolDesc> OnPaintToolChanged;
     
-    public Camera Camera;
-    public PaintToolDesc PaintToolDesc;
+    public PaintToolDesc PaintTool;
     public PaintableService PaintableService;
     public SaveLoadService SaveLoadService;
 
@@ -18,43 +18,28 @@ namespace CreatyTest.Painting.PaintTools
     {
       PaintableService.OnPaintableChanged += ReInitPaintTool;
       
-      PaintToolDesc paintToolDesc = SaveLoadService.LoadPaintTool() ?? PaintToolDesc;
-      SetPaintTool(paintToolDesc);
+      PaintToolDesc paintTool = SaveLoadService.LoadPaintTool() ?? PaintTool;
+      SetPaintTool(paintTool);
     }
 
-    public void ChangePaintTool(PaintToolDesc paintToolDesc)
+    public void ChangePaintTool(PaintToolDesc paintTool)
     {
-      if (PaintToolDesc == paintToolDesc)
+      if (PaintTool == paintTool)
         return;
 
-      SetPaintTool(paintToolDesc);
+      SetPaintTool(paintTool);
     }
 
-    private void Update()
+    private void SetPaintTool(PaintToolDesc paintTool)
     {
-      if (!Input.GetMouseButton(0))
-        return;
-
-      if (!Physics.Raycast(Camera.ScreenPointToRay(Input.mousePosition), out RaycastHit hit))
-        return;
-
-      var paintable = hit.transform.GetComponent<Paintable>();
-      if (paintable == null)
-        return;
-
-      PaintToolDesc.UpdatePosition(hit.textureCoord);
-      paintable.Paint(PaintToolDesc.PaintMaterial);
-    }
-
-    private void SetPaintTool(PaintToolDesc paintToolDesc)
-    {
-      PaintToolDesc = paintToolDesc;
-      PaintToolDesc.Init(PaintableService.Paintable);
-      SaveLoadService.SavePaintTool(PaintToolDesc);
-      OnPaintToolChanged?.Invoke();
+      PaintTool = paintTool;
+      PaintTool.Init(PaintableService.Paintable);
+      SaveLoadService.SavePaintTool(PaintTool);
+      
+      OnPaintToolChanged?.Invoke(paintTool);
     }
 
     private void ReInitPaintTool(Paintable paintable) => 
-      PaintToolDesc.Init(paintable);
+      PaintTool.Init(paintable);
   }
 }

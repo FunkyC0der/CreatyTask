@@ -8,9 +8,8 @@ namespace CreatyTest.HUD
   [RequireComponent(typeof(Button))]
   public class SelectPaintToolButton : MonoBehaviour
   {
-    [FormerlySerializedAs("PaintService")]
-    public PaintToolService paintToolService;
     public PaintToolDesc PaintToolDesc;
+    public PaintToolService PaintTools;
 
     private Button m_button;
 
@@ -22,14 +21,14 @@ namespace CreatyTest.HUD
 
     private void Start()
     {
-      UpdateView();
-      paintToolService.OnPaintToolChanged += UpdateView;
+      UpdateView(PaintTools.PaintTool);
+      PaintTools.OnPaintToolChanged += UpdateView;
     }
 
-    private void UpdateView() => 
-      m_button.interactable = PaintToolDesc != paintToolService.PaintToolDesc;
+    private void UpdateView(PaintToolDesc paintTool) => 
+      m_button.interactable = PaintToolDesc != paintTool;
 
     private void SelectPaintTool() => 
-      paintToolService.ChangePaintTool(PaintToolDesc);
+      PaintTools.ChangePaintTool(PaintToolDesc);
   }
 }

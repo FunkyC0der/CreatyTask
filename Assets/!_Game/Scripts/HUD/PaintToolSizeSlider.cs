@@ -1,14 +1,12 @@
 using CreatyTest.Painting.PaintTools;
 using UnityEngine;
-using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace CreatyTest.HUD
 {
   public class PaintToolSizeSlider : MonoBehaviour
   {
-    [FormerlySerializedAs("PaintService")]
-    public PaintToolService paintToolService;
+    public PaintToolService PaintTools;
     public Slider Slider;
 
     public float MinSize;
@@ -17,30 +15,29 @@ namespace CreatyTest.HUD
     private float m_currentSize;
     private PaintToolDesc m_paintTool;
 
+    private PaintToolDesc PaintTool => PaintTools.PaintTool;
     
     private void Start()
     {
-      UpdatePaintToolTool();
-      paintToolService.OnPaintToolChanged += UpdatePaintToolTool;
+      UpdateView(PaintTool);
+      PaintTools.OnPaintToolChanged += UpdateView;
 
       Slider.minValue = MinSize;
       Slider.maxValue = MaxSize;
       
-      Slider.onValueChanged.AddListener(ChangeSize);
+      Slider.onValueChanged.AddListener(ChangePaintToolSize);
     }
 
-    private void UpdatePaintToolTool()
+    private void UpdateView(PaintToolDesc paintTool)
     {
-      m_paintTool = paintToolService.PaintToolDesc;
-
-      gameObject.SetActive(m_paintTool.CanChangeSize);
-      Slider.value = m_paintTool.Size;
+      gameObject.SetActive(paintTool.CanChangeSize);
+      Slider.value = paintTool.Size;
     }
 
-    private void ChangeSize(float value)
+    private void ChangePaintToolSize(float value)
     {
-      if(m_paintTool.CanChangeSize)
-        m_paintTool.Size = value;
+      if(PaintTool.CanChangeSize)
+        PaintTool.Size = value;
     }
   }
 }

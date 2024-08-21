@@ -166,7 +166,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92a8dac874ec4319b5d81b8bb344526b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintableDesc: {fileID: 11400000, guid: 1d48a807c28e44bfc8d4d8984a74540d, type: 2}
+  PaintableDesc: {fileID: 11400000, guid: 3bb1815ae692a4e65ba5352fd160f6ea, type: 2}
   SaveLoadService: {fileID: 1840986670}
 --- !u!1 &69637411
 GameObject:
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03dac84f6b745289a225f34a1fe3f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintToolService: {fileID: 0}
+  PaintTools: {fileID: 665249441}
   Slider: {fileID: 185681376}
   MinSize: 0.001
   MaxSize: 0.05
@@ -1282,8 +1282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38d4ed67cfb74542928e4789b91f5e08, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Camera: {fileID: 330585545}
-  PaintToolDesc: {fileID: 11400000, guid: ce5ed8cb7eba4456fb83d28e22f0c1dd, type: 2}
+  PaintTool: {fileID: 11400000, guid: ce5ed8cb7eba4456fb83d28e22f0c1dd, type: 2}
   PaintableService: {fileID: 34333608}
   SaveLoadService: {fileID: 1840986670}
 --- !u!4 &665249442
@@ -1607,8 +1606,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: 570a41a9388fc4f3da44dc2d387f360e, type: 2}
+  PaintTools: {fileID: 665249441}
 --- !u!1 &1125212276
 GameObject:
   m_ObjectHideFlags: 0
@@ -1743,8 +1742,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: 2aaf2dbba92044f3f939a36e2c9c9adf, type: 2}
+  PaintTools: {fileID: 665249441}
 --- !u!224 &1187447298 stripped
 RectTransform:
   m_CorrespondingSourceObject: {fileID: 2130943084915617137, guid: 4214b57e615806c448ba9d993d629531,
@@ -1879,6 +1878,52 @@ RectTransform:
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: -20, y: 0}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!1 &1421476936
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1421476937}
+  - component: {fileID: 1421476938}
+  m_Layer: 0
+  m_Name: PaintCursor
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1421476937
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421476936}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1796480568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1421476938
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1421476936}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: acb68093697c4e78ad18bb696bd33be9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Camera: {fileID: 330585545}
+  PaintTools: {fileID: 665249441}
 --- !u!1 &1580743042
 GameObject:
   m_ObjectHideFlags: 0
@@ -2062,7 +2107,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a319926e01d450a92eb43c686d1bacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintToolService: {fileID: 0}
+  PaintTools: {fileID: 665249441}
   ColorPickerView: {fileID: 1187447299}
 --- !u!1 &1603927326
 GameObject:
@@ -2198,6 +2243,7 @@ Transform:
   m_Children:
   - {fileID: 665249442}
   - {fileID: 34333607}
+  - {fileID: 1421476937}
   - {fileID: 1840986671}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -2597,8 +2643,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2be2968feb2c48278abea821b5c33e4b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  paintToolService: {fileID: 0}
   PaintToolDesc: {fileID: 11400000, guid: ce5ed8cb7eba4456fb83d28e22f0c1dd, type: 2}
+  PaintTools: {fileID: 665249441}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

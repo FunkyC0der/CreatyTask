@@ -6,32 +6,29 @@ namespace CreatyTest.HUD
 {
   public class PaintToolColorPicker : MonoBehaviour
   {
-    [FormerlySerializedAs("PaintService")]
-    public PaintToolService paintToolService;
+    public PaintToolService PaintTools;
     public FlexibleColorPicker ColorPickerView;
 
-    private PaintToolDesc m_paintTool;
+    private PaintToolDesc PaintTool => PaintTools.PaintTool;
 
     private void Start()
     {
-      UpdatePaintToolTool();
-      paintToolService.OnPaintToolChanged += UpdatePaintToolTool;
+      UpdateView(PaintTool);
+      PaintTools.OnPaintToolChanged += UpdateView;
       
-      ColorPickerView.onColorChange.AddListener(ChangeColor);
+      ColorPickerView.onColorChange.AddListener(ChangePaintToolColor);
     }
 
-    private void UpdatePaintToolTool()
+    private void UpdateView(PaintToolDesc paintTool)
     {
-      m_paintTool = paintToolService.PaintToolDesc;
-      
-      gameObject.SetActive(m_paintTool.CanChangeColor);
-      ColorPickerView.color = m_paintTool.Color;
+      gameObject.SetActive(paintTool.CanChangeColor);
+      ColorPickerView.color = paintTool.Color;
     }
 
-    private void ChangeColor(Color color)
+    private void ChangePaintToolColor(Color color)
     {
-      if(m_paintTool.CanChangeColor)
-        m_paintTool.Color = color;
+      if(PaintTool.CanChangeColor)
+        PaintTool.Color = color;
     }
   }
 }
