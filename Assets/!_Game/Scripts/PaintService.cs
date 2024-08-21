@@ -1,4 +1,5 @@
 using System;
+using CreatyTest.SaveLoad;
 using UnityEngine;
 
 namespace CreatyTest
@@ -9,13 +10,20 @@ namespace CreatyTest
     
     public Camera Camera;
     public PaintToolDesc PaintToolDesc;
+    public SaveLoadService SaveLoadService;
 
     private PaintTool m_paintTool;
     
     public PaintTool PaintTool => m_paintTool;
 
-    private void Awake() => 
+    private void Awake()
+    {
+      PaintToolDesc savedPaintToolDesc = SaveLoadService.LoadCurrentPaintTool();
+      if (savedPaintToolDesc)
+        PaintToolDesc = savedPaintToolDesc;
+      
       CreatePaintTool(PaintToolDesc);
+    }
 
     public void ChangePaintTool(PaintToolDesc paintToolDesc)
     {
@@ -46,6 +54,7 @@ namespace CreatyTest
     {
       m_paintTool = Instantiate(paintToolDesc.Prefab, transform);
       PaintToolDesc = paintToolDesc;
+      SaveLoadService.SaveCurrentPaintTool(PaintToolDesc);
       
       OnPaintToolChanged?.Invoke();
     }
