@@ -39,6 +39,9 @@ namespace CreatyTest.Painting.Paintables
       Graphics.Blit(m_prevPaintTexture, m_paintTexture, paintMaterial);
     }
 
+    public void Clear() => 
+      SetTexture(OriginalTexture);
+
     private void InitPaintTextures()
     {
       Material material = m_renderer.material;

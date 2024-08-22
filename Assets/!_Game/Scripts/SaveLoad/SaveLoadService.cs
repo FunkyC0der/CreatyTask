@@ -47,7 +47,7 @@ namespace CreatyTest.SaveLoad
       return texture;
     }
 
-    public static void ClearPaintableTexture(PaintableDesc paintableDesc)
+    public static void DeletePaintableTexture(PaintableDesc paintableDesc)
     {
       string filePath = PaintableTextureFilePath(paintableDesc);
       File.Delete(filePath);

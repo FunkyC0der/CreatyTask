@@ -5,6 +5,7 @@ using VContainer;
 
 namespace CreatyTest.HUD
 {
+  [RequireComponent(typeof(Button))]
   public class SelectPaintableButton : MonoBehaviour
   {
     public PaintableDesc PaintableDesc;

@@ -10,7 +10,7 @@ namespace CreatyTest.HUD
   {
     public Button SaveButton;
     public Button LoadButton;
-    public Button ClearButton;
+    public Button DeleteButton;
 
     private PaintableService m_paintableService;
 
@@ -24,7 +24,7 @@ namespace CreatyTest.HUD
 
       SaveButton.onClick.AddListener(Save);
       LoadButton.onClick.AddListener(Load);
-      ClearButton.onClick.AddListener(Clear);
+      DeleteButton.onClick.AddListener(Delete);
 
       UpdateView();
     }
@@ -38,10 +38,9 @@ namespace CreatyTest.HUD
     private void Load() =>
       Paintable.SetTexture(SaveLoadService.LoadPaintableTexture(Paintable.Desc));
 
-    private void Clear()
+    private void Delete()
     {
-      Paintable.SetTexture(Paintable.OriginalTexture);
-      SaveLoadService.ClearPaintableTexture(Paintable.Desc);
+      SaveLoadService.DeletePaintableTexture(Paintable.Desc);
       LoadButton.interactable = false;
     }
 
