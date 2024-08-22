@@ -1,3 +1,4 @@
+using CreatyTest.Extensions;
 using UnityEngine;
 
 namespace CreatyTest.Painting.Paintables
@@ -5,8 +6,6 @@ namespace CreatyTest.Painting.Paintables
   [RequireComponent(typeof(Renderer))]
   public class Paintable : MonoBehaviour
   {
-    private const RenderTextureFormat m_kRenderTextureFormat = RenderTextureFormat.ARGB32;
-    
     private static readonly Vector2Int m_sPaintTextureDefaultSize = new(1024, 1024);
 
     public Color EmptyTextureColor = Color.white;
@@ -16,38 +15,23 @@ namespace CreatyTest.Painting.Paintables
 
     private Renderer m_renderer;
 
-    private Texture m_originalTexture;
     private RenderTexture m_paintTexture;
     private RenderTexture m_prevPaintTexture;
     
-    public Texture OriginalTexture => m_originalTexture;
+    public Texture OriginalTexture { get; private set; }
 
     private void Awake()
     {
       m_renderer = GetComponent<Renderer>();
 
-      m_paintTexture = CreateNewRenderTexture();
-      m_renderer.material.mainTexture = m_paintTexture;
-
-      m_prevPaintTexture = new RenderTexture(m_paintTexture.descriptor);
-      Graphics.CopyTexture(m_paintTexture, m_prevPaintTexture);
+      InitPaintTextures();
     }
 
     public void SetTexture(Texture texture) => 
       Graphics.Blit(texture, m_paintTexture);
 
-    public Texture2D GetTexture()
-    {
-      RenderTexture cacheActiveRT = RenderTexture.active;
-      RenderTexture.active = m_paintTexture;
-
-      Texture2D texture = new Texture2D(m_paintTexture.width, m_paintTexture.height, TextureFormat.ARGB32, false);
-      texture.ReadPixels(new Rect(0, 0, m_paintTexture.width, m_paintTexture.height), 0, 0);
-      texture.Apply();
-
-      RenderTexture.active = cacheActiveRT;
-      return texture;
-    }
+    public Texture2D GetTexture() => 
+      m_paintTexture.CloneToTexture2D();
 
     public void Paint(Material paintMaterial)
     {
@@ -55,36 +39,31 @@ namespace CreatyTest.Painting.Paintables
       Graphics.Blit(m_prevPaintTexture, m_paintTexture, paintMaterial);
     }
 
-    private RenderTexture CreateNewRenderTexture()
+    private void InitPaintTextures()
     {
-      RenderTexture renderTexture;
       Material material = m_renderer.material;
 
       if (material.mainTexture)
       {
-        renderTexture = new RenderTexture(material.mainTexture.width, material.mainTexture.height, 0, m_kRenderTextureFormat);
-        Graphics.Blit(material.mainTexture, renderTexture);
-      
-        m_originalTexture = material.mainTexture;
+        OriginalTexture = material.mainTexture;
+        m_paintTexture = material.mainTexture.CloneToRenderTexture();
       }
       else
       {
-        renderTexture = new RenderTexture(
-          m_sPaintTextureDefaultSize.x,
-          m_sPaintTextureDefaultSize.y,
-          0,
-          m_kRenderTextureFormat);
-
-        Texture2D solidTexture = new(1, 1);
-        solidTexture.SetPixel(0, 0, EmptyTextureColor);
-        solidTexture.Apply();
-        
-        Graphics.Blit(solidTexture, renderTexture);
-
-        m_originalTexture = solidTexture;
+        OriginalTexture = CreateSolidTexture();
+        m_paintTexture = OriginalTexture.CloneToRenderTexture(m_sPaintTextureDefaultSize);
       }
 
-      return renderTexture;
+      material.mainTexture = m_paintTexture;
+      m_prevPaintTexture = m_paintTexture.CloneToRenderTexture();
+    }
+
+    private Texture CreateSolidTexture()
+    {
+      Texture2D solidTexture = new(1, 1, TextureFormat.RGB24, false);
+      solidTexture.SetPixel(0, 0, EmptyTextureColor);
+      solidTexture.Apply();
+      return solidTexture;
     }
   }
 }
