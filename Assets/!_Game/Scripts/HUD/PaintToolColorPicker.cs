@@ -8,15 +8,15 @@ namespace CreatyTest.HUD
   {
     public FlexibleColorPicker ColorPickerView;
     
-    private PaintToolService m_paintTools;
+    private PaintToolService m_paintToolService;
 
-    private PaintToolDesc PaintTool => m_paintTools.PaintTool;
+    private PaintToolDesc PaintTool => m_paintToolService.PaintTool;
 
     [Inject]
-    private void Construct(PaintToolService paintTools)
+    private void Construct(PaintToolService paintToolService)
     {
-      m_paintTools = paintTools;
-      m_paintTools.OnPaintToolChanged += UpdateView;
+      m_paintToolService = paintToolService;
+      m_paintToolService.OnPaintToolChanged += UpdateView;
       
       UpdateView();
     }

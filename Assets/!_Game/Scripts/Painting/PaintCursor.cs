@@ -9,13 +9,13 @@ namespace CreatyTest.Painting
   {
     public Camera Camera;
     
-    private PaintToolService m_paintTools;
+    private PaintToolService m_paintToolService;
 
-    private PaintToolDesc PaintTool => m_paintTools.PaintTool;
+    private PaintToolDesc PaintTool => m_paintToolService.PaintTool;
 
     [Inject]
-    private void Construct(PaintToolService paintTools) => 
-      m_paintTools = paintTools;
+    private void Construct(PaintToolService paintToolService) => 
+      m_paintToolService = paintToolService;
 
     private void Update()
     {

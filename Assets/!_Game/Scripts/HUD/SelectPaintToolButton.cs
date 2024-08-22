@@ -11,15 +11,15 @@ namespace CreatyTest.HUD
     public PaintToolDesc PaintToolDesc;
     public PaintToolService PaintTools;
 
-    private PaintToolService m_paintTools;
+    private PaintToolService m_paintToolService;
     private Button m_button;
 
-    private PaintToolDesc PaintTool => m_paintTools.PaintTool;
+    private PaintToolDesc PaintTool => m_paintToolService.PaintTool;
     
     [Inject]
-    private void Construct(PaintToolService paintTools)
+    private void Construct(PaintToolService paintToolService)
     {
-      m_paintTools = paintTools;
+      m_paintToolService = paintToolService;
       PaintTools.OnPaintToolChanged += UpdateView;
 
       m_button = GetComponent<Button>();
