@@ -11,6 +11,9 @@ namespace CreatyTest.SaveLoad
   {
     private const string m_kPaintToolIdKey = "PaintToolId";
     private const string m_kPaintableIdKey = "PaintableId";
+
+    private const string m_kSavesDirectoryName = "GameSaves";
+    private static string m_sSavesDirectoryPath;
     
     public static void SavePaintTool(PaintToolDesc paintToolDesc) => 
       SaveAssetPath(m_kPaintToolIdKey, paintToolDesc);
@@ -54,7 +57,7 @@ namespace CreatyTest.SaveLoad
       File.Exists(PaintableTextureFilePath(paintableDesc));
 
     private static string PaintableTextureFilePath(PaintableDesc paintableDesc) => 
-      Path.Combine(Application.dataPath, paintableDesc.name);
+      Path.Combine(SavesDirectoryPath(), paintableDesc.name + ".png");
 
     private static void SaveAssetPath(string key, Object asset)
     {
@@ -69,6 +72,23 @@ namespace CreatyTest.SaveLoad
       
       string path = PlayerPrefs.GetString(key);
       return AssetDatabase.LoadAssetAtPath<T>(path);
+    }
+
+    private static string SavesDirectoryPath()
+    {
+      if (m_sSavesDirectoryPath == null)
+        InitSavesDirectoryPath();
+      
+      return m_sSavesDirectoryPath;
+    }
+
+    private static void InitSavesDirectoryPath()
+    {
+      string dataPath = Application.isEditor ? Directory.GetCurrentDirectory() : Application.persistentDataPath;
+      m_sSavesDirectoryPath = Path.Combine(dataPath, m_kSavesDirectoryName);
+
+      if (!Directory.Exists(m_sSavesDirectoryPath))
+        Directory.CreateDirectory(m_sSavesDirectoryPath);
     }
   }
 }
