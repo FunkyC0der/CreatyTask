@@ -1,34 +1,39 @@
 using CreatyTest.Painting.PaintTools;
 using UnityEngine;
-using UnityEngine.Serialization;
+using VContainer;
 
 namespace CreatyTest.HUD
 {
   public class PaintToolColorPicker : MonoBehaviour
   {
-    public PaintToolService PaintTools;
     public FlexibleColorPicker ColorPickerView;
+    
+    private PaintToolService m_paintTools;
 
-    private PaintToolDesc PaintTool => PaintTools.PaintTool;
+    private PaintToolDesc PaintTool => m_paintTools.PaintTool;
 
-    private void Start()
+    [Inject]
+    private void Construct(PaintToolService paintTools)
     {
-      UpdateView(PaintTool);
-      PaintTools.OnPaintToolChanged += UpdateView;
+      m_paintTools = paintTools;
+      m_paintTools.OnPaintToolChanged += UpdateView;
       
+      UpdateView();
+    }
+
+    private void OnEnable() => 
       ColorPickerView.onColorChange.AddListener(ChangePaintToolColor);
+
+    private void OnDisable() => 
+      ColorPickerView.onColorChange.RemoveListener(ChangePaintToolColor);
+
+    private void UpdateView()
+    {
+      gameObject.SetActive(PaintTool.CanChangeColor);
+      ColorPickerView.color = PaintTool.Color;
     }
 
-    private void UpdateView(PaintToolDesc paintTool)
-    {
-      gameObject.SetActive(paintTool.CanChangeColor);
-      ColorPickerView.color = paintTool.Color;
-    }
-
-    private void ChangePaintToolColor(Color color)
-    {
-      if(PaintTool.CanChangeColor)
-        PaintTool.Color = color;
-    }
+    private void ChangePaintToolColor(Color color) => 
+      PaintTool.Color = color;
   }
 }

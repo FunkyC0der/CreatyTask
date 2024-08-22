@@ -1327,7 +1327,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e03dac84f6b745289a225f34a1fe3f5f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintTools: {fileID: 665249441}
   Slider: {fileID: 185681376}
   MinSize: 0.001
   MaxSize: 0.05
@@ -1361,7 +1360,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintTool: {fileID: 11400000, guid: ce5ed8cb7eba4456fb83d28e22f0c1dd, type: 2}
-  PaintableService: {fileID: 34333608}
 --- !u!4 &665249442
 Transform:
   m_ObjectHideFlags: 0
@@ -1376,6 +1374,58 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1796480568}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &665872267
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 665872269}
+  - component: {fileID: 665872268}
+  m_Layer: 0
+  m_Name: LifetimeScope
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &665872268
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665872267}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7efbe56f2c8d4935b62399ae0fefc734, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  parentReference:
+    TypeName: 
+  autoRun: 1
+  autoInjectGameObjects:
+  - {fileID: 1421476936}
+  - {fileID: 1603927326}
+  PaintableService: {fileID: 34333608}
+  PaintToolService: {fileID: 665249441}
+--- !u!4 &665872269
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 665872267}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &821629173
 GameObject:
@@ -2062,7 +2112,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintableDesc: {fileID: 11400000, guid: 3bb1815ae692a4e65ba5352fd160f6ea, type: 2}
-  PaintableService: {fileID: 34333608}
 --- !u!1 &1125212276
 GameObject:
   m_ObjectHideFlags: 0
@@ -2767,7 +2816,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   Camera: {fileID: 330585545}
-  PaintTools: {fileID: 665249441}
 --- !u!1 &1512790536
 GameObject:
   m_ObjectHideFlags: 0
@@ -3085,7 +3133,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1a319926e01d450a92eb43c686d1bacb, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PaintTools: {fileID: 665249441}
   ColorPickerView: {fileID: 1187447299}
 --- !u!1 &1603927326
 GameObject:
@@ -3288,7 +3335,6 @@ MonoBehaviour:
   SaveButton: {fileID: 1022821713}
   LoadButton: {fileID: 1141518881}
   ClearButton: {fileID: 821629175}
-  PaintableService: {fileID: 34333608}
 --- !u!1 &1796480567
 GameObject:
   m_ObjectHideFlags: 0
@@ -3318,8 +3364,8 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 665249442}
   - {fileID: 34333607}
+  - {fileID: 665249442}
   - {fileID: 1421476937}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -3458,7 +3504,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   PaintableDesc: {fileID: 11400000, guid: 1d48a807c28e44bfc8d4d8984a74540d, type: 2}
-  PaintableService: {fileID: 34333608}
 --- !u!1 &1917491194
 GameObject:
   m_ObjectHideFlags: 0
@@ -4091,3 +4136,4 @@ SceneRoots:
   - {fileID: 410087041}
   - {fileID: 1796480568}
   - {fileID: 515326474}
+  - {fileID: 665872269}

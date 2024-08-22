@@ -1,15 +1,22 @@
 using CreatyTest.Painting.Paintables;
 using CreatyTest.Painting.PaintTools;
 using UnityEngine;
-using UnityEngine.Serialization;
+using VContainer;
 
 namespace CreatyTest.Painting
 {
   public class PaintCursor : MonoBehaviour
   {
     public Camera Camera;
-    public PaintToolService PaintTools;
     
+    private PaintToolService m_paintTools;
+
+    private PaintToolDesc PaintTool => m_paintTools.PaintTool;
+
+    [Inject]
+    private void Construct(PaintToolService paintTools) => 
+      m_paintTools = paintTools;
+
     private void Update()
     {
       if (!Input.GetMouseButton(0))
@@ -22,8 +29,8 @@ namespace CreatyTest.Painting
       if (paintable == null)
         return;
 
-      PaintTools.PaintTool.UpdatePosition(hit.textureCoord);
-      paintable.Paint(PaintTools.PaintTool.PaintMaterial);
+      PaintTool.UpdatePosition(hit.textureCoord);
+      paintable.Paint(PaintTool.PaintMaterial);
     }
   }
 }

@@ -1,4 +1,3 @@
-using System;
 using System.IO;
 using CreatyTest.Painting.Paintables;
 using CreatyTest.Painting.PaintTools;

@@ -1,20 +1,20 @@
 using System;
 using CreatyTest.SaveLoad;
 using UnityEngine;
+using VContainer;
 
 namespace CreatyTest.Painting.Paintables
 {
   public class PaintableService : MonoBehaviour
   {
-    public event Action<Paintable> OnPaintableChanged;
+    public event Action OnPaintableChanged;
     
     public PaintableDesc PaintableDesc;
 
-    private Paintable m_paintable;
+    public Paintable Paintable { get; private set; }
 
-    public Paintable Paintable => m_paintable;
-
-    private void Awake()
+    [Inject]
+    private void Construct()
     {
       PaintableDesc paintableDesc = SaveLoadService.LoadPaintable() ?? PaintableDesc;
       CreatePaintable(paintableDesc);
@@ -25,8 +25,8 @@ namespace CreatyTest.Painting.Paintables
       if (PaintableDesc == paintableDesc)
         return;
       
-      if(m_paintable)
-        Destroy(m_paintable.gameObject);
+      if(Paintable)
+        Destroy(Paintable.gameObject);
 
       CreatePaintable(paintableDesc);
     }
@@ -35,12 +35,12 @@ namespace CreatyTest.Painting.Paintables
     {
       PaintableDesc = paintableDesc;
       
-      m_paintable = Instantiate(PaintableDesc.Prefab, transform);
-      m_paintable.Desc = PaintableDesc;
+      Paintable = Instantiate(PaintableDesc.Prefab, transform);
+      Paintable.Desc = PaintableDesc;
 
       SaveLoadService.SavePaintable(PaintableDesc);
       
-      OnPaintableChanged?.Invoke(m_paintable);
+      OnPaintableChanged?.Invoke();
     }
   }
 }

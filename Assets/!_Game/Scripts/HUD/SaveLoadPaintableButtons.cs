@@ -2,6 +2,7 @@ using CreatyTest.Painting.Paintables;
 using CreatyTest.SaveLoad;
 using UnityEngine;
 using UnityEngine.UI;
+using VContainer;
 
 namespace CreatyTest.HUD
 {
@@ -11,17 +12,21 @@ namespace CreatyTest.HUD
     public Button LoadButton;
     public Button ClearButton;
 
-    public PaintableService PaintableService;
+    private PaintableService m_paintableService;
 
-    private Paintable Paintable => PaintableService.Paintable;
+    private Paintable Paintable => m_paintableService.Paintable;
 
-    private void Awake()
+    [Inject]
+    private void Construct(PaintableService paintableService)
     {
+      m_paintableService = paintableService;
+      m_paintableService.OnPaintableChanged += UpdateView;
+
       SaveButton.onClick.AddListener(Save);
       LoadButton.onClick.AddListener(Load);
       ClearButton.onClick.AddListener(Clear);
 
-      PaintableService.OnPaintableChanged += _ => UpdateView();
+      UpdateView();
     }
 
     private void Save()

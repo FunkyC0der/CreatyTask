@@ -2,20 +2,23 @@ using System;
 using CreatyTest.Painting.Paintables;
 using CreatyTest.SaveLoad;
 using UnityEngine;
-using UnityEngine.Serialization;
+using VContainer;
 
 namespace CreatyTest.Painting.PaintTools
 {
   public class PaintToolService : MonoBehaviour
   {
-    public event Action<PaintToolDesc> OnPaintToolChanged;
+    public event Action OnPaintToolChanged;
     
     public PaintToolDesc PaintTool;
-    public PaintableService PaintableService;
+    
+    private PaintableService m_paintableService;
 
-    private void Awake()
+    [Inject]
+    private void Construct(PaintableService paintableService)
     {
-      PaintableService.OnPaintableChanged += ReInitPaintTool;
+      m_paintableService = paintableService;
+      m_paintableService.OnPaintableChanged += ReInitPaintTool;
       
       PaintToolDesc paintTool = SaveLoadService.LoadPaintTool() ?? PaintTool;
       SetPaintTool(paintTool);
@@ -32,13 +35,13 @@ namespace CreatyTest.Painting.PaintTools
     private void SetPaintTool(PaintToolDesc paintTool)
     {
       PaintTool = paintTool;
-      PaintTool.Init(PaintableService.Paintable);
+      PaintTool.Init(m_paintableService.Paintable);
       SaveLoadService.SavePaintTool(PaintTool);
       
-      OnPaintToolChanged?.Invoke(paintTool);
+      OnPaintToolChanged?.Invoke();
     }
 
-    private void ReInitPaintTool(Paintable paintable) => 
-      PaintTool.Init(paintable);
+    private void ReInitPaintTool() => 
+      PaintTool.Init(m_paintableService.Paintable);
   }
 }
