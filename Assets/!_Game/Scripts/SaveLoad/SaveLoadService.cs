@@ -8,37 +8,31 @@ using Object = UnityEngine.Object;
 
 namespace CreatyTest.SaveLoad
 {
-  public class SaveLoadService : MonoBehaviour
+  public static class SaveLoadService
   {
-    public event Action OnPaintableTextureSavesChanged;
-    
     private const string m_kPaintToolIdKey = "PaintToolId";
     private const string m_kPaintableIdKey = "PaintableId";
     
-    public void SavePaintTool(PaintToolDesc paintToolDesc) => 
+    public static void SavePaintTool(PaintToolDesc paintToolDesc) => 
       SaveAssetPath(m_kPaintToolIdKey, paintToolDesc);
 
-    public PaintToolDesc LoadPaintTool() => 
+    public static PaintToolDesc LoadPaintTool() => 
       LoadAssetByPath<PaintToolDesc>(m_kPaintToolIdKey);
 
-    public void SavePaintable(PaintableDesc paintableDesc) =>
+    public static void SavePaintable(PaintableDesc paintableDesc) =>
       SaveAssetPath(m_kPaintableIdKey, paintableDesc);
 
-    public PaintableDesc LoadPaintable() =>
+    public static PaintableDesc LoadPaintable() =>
       LoadAssetByPath<PaintableDesc>(m_kPaintableIdKey);
 
-    public void SavePaintableTexture(PaintableDesc paintableDesc, Texture2D texture)
+    public static void SavePaintableTexture(PaintableDesc paintableDesc, Texture2D texture)
     {
       byte[] bytes = texture.EncodeToPNG();
       string filePath = PaintableTextureFilePath(paintableDesc);
       File.WriteAllBytes(filePath, bytes);
-      
-      OnPaintableTextureSavesChanged?.Invoke();
-      
-      Debug.Log(bytes.Length / 1024 + "Kb was saved as: " + filePath);
     }
 
-    public Texture2D LoadPaintableTexture(PaintableDesc paintableDesc)
+    public static Texture2D LoadPaintableTexture(PaintableDesc paintableDesc)
     {
       string filePath = PaintableTextureFilePath(paintableDesc);
       if (!File.Exists(filePath))
@@ -51,27 +45,25 @@ namespace CreatyTest.SaveLoad
       return texture;
     }
 
-    public void ClearPaintableTexture(PaintableDesc paintableDesc)
+    public static void ClearPaintableTexture(PaintableDesc paintableDesc)
     {
       string filePath = PaintableTextureFilePath(paintableDesc);
       File.Delete(filePath);
-
-      OnPaintableTextureSavesChanged?.Invoke();
     }
 
-    public bool HasSavedPaintableTexture(PaintableDesc paintableDesc) => 
+    public static bool HasSavedPaintableTexture(PaintableDesc paintableDesc) => 
       File.Exists(PaintableTextureFilePath(paintableDesc));
 
     private static string PaintableTextureFilePath(PaintableDesc paintableDesc) => 
       Path.Combine(Application.dataPath, paintableDesc.name);
 
-    private void SaveAssetPath(string key, Object asset)
+    private static void SaveAssetPath(string key, Object asset)
     {
       PlayerPrefs.SetString(key, AssetDatabase.GetAssetPath(asset));
       PlayerPrefs.Save();
     }
 
-    private T LoadAssetByPath<T>(string key) where T : Object
+    private static T LoadAssetByPath<T>(string key) where T : Object
     {
       if (!PlayerPrefs.HasKey(key))
         return null;

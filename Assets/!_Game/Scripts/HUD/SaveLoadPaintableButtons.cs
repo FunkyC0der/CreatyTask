@@ -1,4 +1,5 @@
 using CreatyTest.Painting.Paintables;
+using CreatyTest.SaveLoad;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -12,20 +13,34 @@ namespace CreatyTest.HUD
 
     public PaintableService PaintableService;
 
+    private Paintable Paintable => PaintableService.Paintable;
+
     private void Awake()
     {
-      SaveButton.onClick.AddListener(() => PaintableService.Save());
-      LoadButton.onClick.AddListener(() => PaintableService.Load());
-      ClearButton.onClick.AddListener(() => PaintableService.Clear());
+      SaveButton.onClick.AddListener(Save);
+      LoadButton.onClick.AddListener(Load);
+      ClearButton.onClick.AddListener(Clear);
 
-      PaintableService.OnPaintableChanged += UpdateView;
-      PaintableService.SaveLoadService.OnPaintableTextureSavesChanged += UpdateView;
+      PaintableService.OnPaintableChanged += _ => UpdateView();
     }
 
-    private void UpdateView(Paintable paintable) => 
-      UpdateView();
+    private void Save()
+    {
+      SaveLoadService.SavePaintableTexture(Paintable.Desc, Paintable.GetTexture());
+      LoadButton.interactable = true;
+    }
+
+    private void Load() =>
+      Paintable.SetTexture(SaveLoadService.LoadPaintableTexture(Paintable.Desc));
+
+    private void Clear()
+    {
+      Paintable.SetTexture(Paintable.OriginalTexture);
+      SaveLoadService.ClearPaintableTexture(Paintable.Desc);
+      LoadButton.interactable = false;
+    }
 
     private void UpdateView() => 
-      LoadButton.interactable = PaintableService.CanLoad();
+      LoadButton.interactable = SaveLoadService.HasSavedPaintableTexture(Paintable.Desc);
   }
 }

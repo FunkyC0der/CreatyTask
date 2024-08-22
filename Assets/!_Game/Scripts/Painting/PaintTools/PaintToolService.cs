@@ -12,7 +12,6 @@ namespace CreatyTest.Painting.PaintTools
     
     public PaintToolDesc PaintTool;
     public PaintableService PaintableService;
-    public SaveLoadService SaveLoadService;
 
     private void Awake()
     {
