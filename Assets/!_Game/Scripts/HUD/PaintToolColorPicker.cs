@@ -29,8 +29,8 @@ namespace CreatyTest.HUD
 
     private void UpdateView()
     {
-      gameObject.SetActive(PaintTool.CanChangeColor);
       ColorPickerView.color = PaintTool.Color;
+      gameObject.SetActive(PaintTool.CanChangeColor);
     }
 
     private void ChangePaintToolColor(Color color) => 
